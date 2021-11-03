@@ -24,7 +24,6 @@ import config from './config';
         DATABASE_PORT: Joi.number().required()
       })
     }),
-    DatabaseModule,
     ProductsModule,
     HttpModule,
     DatabaseModule],
