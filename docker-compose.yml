@@ -1,4 +1,4 @@
-version: '3.3'
+version: '3.8'
 services:
   database:
     image: postgres:13
@@ -10,3 +10,10 @@ services:
       - '5432:5432'
     volumes:
       - ./postgres_data:/var/lib/postgresql/data
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=romeza1239@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+    ports:
+      - "5050:80"

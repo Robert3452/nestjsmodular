@@ -7,35 +7,40 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { ProductsModule } from './products/products.module';
 import { DatabaseModule } from './database/database.module';
-import { ConfigModule } from '@nestjs/config'
+import { ConfigModule } from '@nestjs/config';
+
 import { enviroments } from './enviroments';
 import config from './config';
+import { TypeOrmModule } from '@nestjs/typeorm';
 // nest g module users
 // nest g module products
+
 @Module({
-  imports: [UsersModule,
+  imports: [
+    UsersModule,
     ConfigModule.forRoot({
-      envFilePath: enviroments[process.env.NODE_ENV || "dev"],
+      envFilePath: enviroments[process.env.NODE_ENV || 'dev'],
       isGlobal: true,
       load: [config],
       validationSchema: Joi.object({
         API_KEY: Joi.number().required(),
         DATABASE_NAME: Joi.string().required(),
-        DATABASE_PORT: Joi.number().required()
-      })
+        DATABASE_PORT: Joi.number().required(),
+        POSTGRES_DB: Joi.string().required(),
+        POSTGRES_USER: Joi.string().required(),
+        POSTGRES_PASSWORD: Joi.string().required(),
+        POSTGRES_PORT: Joi.number().required(),
+        POSTGRES_HOST: Joi.string().required(),
+      }),
     }),
     ProductsModule,
     HttpModule,
-    DatabaseModule],
+    DatabaseModule,
+  ],
   controllers: [AppController],
   providers: [
-    // usClass
+    // useClass
     AppService,
-    // UseValue
-    // {
-    // provide: 'API_KEY',
-    // useValue: process.env.NODE_ENV === 'prod' ? API_KEY_PROD : API_KEY
-    // },
     // UseFactory
     {
       provide: 'TASKS',
@@ -46,8 +51,8 @@ import config from './config';
           .toPromise();
         return tasks.data;
       },
-      inject: [HttpService]
-    }
+      inject: [HttpService],
+    },
   ],
 })
-export class AppModule { }
+export class AppModule {}
