@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import { Timestamp } from 'src/Global/Entity/Timestamp.entity';
 import {
   Column,
@@ -16,6 +17,7 @@ export class User extends Timestamp {
   @Column({ type: 'varchar', length: 255 })
   email: string;
 
+  @Exclude()
   @Column({ type: 'varchar', length: 255 })
   password: string; //encrypt
 
