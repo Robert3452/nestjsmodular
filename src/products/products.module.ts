@@ -7,9 +7,9 @@ import { CategoriesController } from './controllers/categories.controller';
 import { ProductsService } from './services/products.service';
 import { BrandsService } from './services/brands.service';
 import { CategoriesService } from './services/categories.service';
-import { Product } from './entities/product.entity';
-import { Category } from './entities/category.entity';
-import { Brand } from './entities/brand.entity';
+import { Brand } from 'src/database/entities/brand.entity';
+import { Product } from 'src/database/entities/product.entity';
+import { Category } from 'src/database/entities/category.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Product, Category, Brand])],

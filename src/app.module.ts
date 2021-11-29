@@ -12,6 +12,7 @@ import { ConfigModule } from '@nestjs/config';
 import { enviroments } from './enviroments';
 import config from './config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthModule } from './auth/auth.module';
 // nest g module users
 // nest g module products
 
@@ -36,6 +37,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     ProductsModule,
     HttpModule,
     DatabaseModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [

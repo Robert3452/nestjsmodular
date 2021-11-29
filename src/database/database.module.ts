@@ -4,6 +4,13 @@ import { Module, Global } from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import config from '../config';
+import { Order } from './entities/order.entity';
+import { Product } from './entities/product.entity';
+import { User } from './entities/user.entity';
+import { OrderItem } from './entities/order-item.entity';
+import { Brand } from './entities/brand.entity';
+import { Category } from './entities/category.entity';
+import { Customer } from './entities/customer.entity';
 const API_KEY = '1234567890';
 const API_KEY_PROD = 'secretKey#$23';
 
@@ -29,6 +36,15 @@ const API_KEY_PROD = 'secretKey#$23';
           database,
           synchronize: false, // WARNING: en producción no se debería utilizar el valor en true es preferible usar migraciones
           autoLoadEntities: true,
+          entities: [
+            Order,
+            Product,
+            User,
+            OrderItem,
+            Brand,
+            Category,
+            Customer,
+          ],
         };
       },
       inject: [config.KEY],

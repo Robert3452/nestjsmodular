@@ -1,12 +1,12 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { Product } from './../entities/product.entity';
 import { CreateProductDto, UpdateProductDto } from '../dtos/products.dto';
-import { Between, FindCondition, FindConditions, Repository } from 'typeorm';
-import { Brand } from '../entities/brand.entity';
-import { Category } from '../entities/category.entity';
+import { Between, FindConditions, Repository } from 'typeorm';
+import { Brand } from '../../database/entities/brand.entity';
 import { FilterProductDto } from '../dtos/filter.dto';
+import { Category } from 'src/database/entities/category.entity';
+import { Product } from 'src/database/entities/product.entity';
 
 @Injectable()
 export class ProductsService {

@@ -1,7 +1,7 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { User } from '../entities/user.entity';
+import { User } from 'src/database/entities/user.entity';
 import { CreateUserDto, UpdateUserDto } from '../dtos/user.dto';
-import { Order } from '../entities/order.entity';
+import { Order } from 'src/database/entities/order.entity';
 import { ProductsService } from 'src/products/services/products.service';
 import { Client } from 'pg';
 import { InjectRepository } from '@nestjs/typeorm';
