@@ -24,7 +24,7 @@ export class UsersService {
   }
 
   async findOne(id: number) {
-    const user = await this.userRepo.findOne(id);
+    const user = await this.userRepo.findOne(id, { relations: ['customer'] });
     if (!user) {
       throw new NotFoundException(`User #${id} not found`);
     }
@@ -42,6 +42,10 @@ export class UsersService {
 
   async update(id: number, changes: UpdateUserDto) {
     const user = await this.findOne(id);
+    if (changes.customerId) {
+      const customer = await this.customersService.findOne(changes.customerId);
+      user.customer = customer;
+    }
     this.userRepo.merge(user, changes);
     return this.userRepo.save(user);
   }
@@ -52,13 +56,12 @@ export class UsersService {
     return userFound;
   }
 
-  async getOrdersByUser(id: number): Promise<Order> {
+  async getOrdersByUser(id: number): Promise<Order[]> {
     const user = await this.findOne(id);
-    return {
-      date: new Date(),
-      user,
-      products: await this.productService.findAll(),
-    };
+    if (!user.customer) {
+      throw new NotFoundException(`Customer not found userId ${id}`);
+    }
+    return user.customer.orders || [];
   }
 
   getTasks() {

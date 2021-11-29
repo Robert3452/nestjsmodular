@@ -1,7 +1,7 @@
 import { PrimaryGeneratedColumn, Column, Entity, ManyToMany } from 'typeorm';
 import { Timestamp } from '../../Global/Entity/Timestamp.entity';
 import { Product } from './product.entity';
-@Entity()
+@Entity({ name: 'categories' })
 export class Category extends Timestamp {
   @PrimaryGeneratedColumn()
   id: number;

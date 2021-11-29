@@ -2,13 +2,14 @@ import { Timestamp } from 'src/Global/Entity/Timestamp.entity';
 import {
   Column,
   Entity,
-  JoinColumn,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Order } from './order.entity';
 import { User } from './user.entity';
 
-@Entity()
+@Entity({name:"customers"})
 export class Customer extends Timestamp {
   @PrimaryGeneratedColumn()
   id: number;
@@ -16,7 +17,7 @@ export class Customer extends Timestamp {
   @Column({ type: 'varchar', length: 255 })
   name: string;
 
-  @Column({ type: 'varchar', length: 255 })
+  @Column({ type: 'varchar', length: 255 ,name:"last_name"})
   lastName: string;
 
   @Column({ type: 'varchar', length: 255 })
@@ -24,4 +25,7 @@ export class Customer extends Timestamp {
 
   @OneToOne(() => User, (user) => user.customer, { nullable: true })
   user: User;
+
+  @OneToMany(() => Order, (order) => order.customer)
+  orders: Order[];
 }
