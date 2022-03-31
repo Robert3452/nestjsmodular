@@ -20,8 +20,14 @@ import { OrderItemsController } from './controllers/order-items.controller';
     ProductsModule,
     TypeOrmModule.forFeature([User, Customer, Order, OrderItem]),
   ],
-  controllers: [CustomerController, UsersController, OrdersController, OrderItemsController],
+  controllers: [
+    CustomerController,
+    UsersController,
+    OrdersController,
+    OrderItemsController,
+  ],
   // Un servicio pertenece solamente a un módulo
   providers: [CustomersService, UsersService, OrdersService, OrderItemsService],
+  exports: [UsersService],
 })
 export class UsersModule {}

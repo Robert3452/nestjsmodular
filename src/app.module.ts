@@ -11,7 +11,6 @@ import { ConfigModule } from '@nestjs/config';
 
 import { enviroments } from './enviroments';
 import config from './config';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 // nest g module users
 // nest g module products
@@ -24,7 +23,8 @@ import { AuthModule } from './auth/auth.module';
       isGlobal: true,
       load: [config],
       validationSchema: Joi.object({
-        API_KEY: Joi.number().required(),
+        API_KEY: Joi.string().required(),
+        JWT_SECRET: Joi.string().required(),
         DATABASE_NAME: Joi.string().required(),
         DATABASE_PORT: Joi.number().required(),
         POSTGRES_DB: Joi.string().required(),
